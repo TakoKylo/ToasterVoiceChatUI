@@ -30,6 +30,10 @@ public static class VoiceChatUI
         // TUtils.LogDebug($"Patch: UIHUDController.Start called.");
         // if (!Plugin.configTeamIndicatorEnabled.Value) return;
         CreateVoiceChatUI(uiHud, uiHudContainer);
+        
+        // Initialize PlayerActivityIndicator for overhead indicators
+        InitializePlayerActivityIndicator();
+        
         EventManager em = EventManager.Instance;
         // em.AddEventListener("Event_Client_OnServerConfiguration", new Action<Il2CppSystem.Collections.Generic.Dictionary<string, Il2CppSystem.Object>>(
         //     (evt) =>
@@ -55,6 +59,21 @@ public static class VoiceChatUI
 
             Setup(__instance);
             isSetup = true;
+        }
+    }
+    
+    private static void InitializePlayerActivityIndicator()
+    {
+        try
+        {
+            // Create a persistent GameObject for the PlayerActivityIndicator
+            GameObject indicatorObj = new GameObject("ToasterVoiceActivityIndicator");
+            GameObject.DontDestroyOnLoad(indicatorObj);
+            indicatorObj.AddComponent<PlayerActivityIndicator>();
+        }
+        catch (System.Exception e)
+        {
+            Plugin.LogError($"Failed to initialize PlayerActivityIndicator: {e.Message}");
         }
     }
 
