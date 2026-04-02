@@ -38,8 +38,10 @@
 
     <MakeDir Directories="$(TargetDir)" />
     <Copy SourceFiles="$(OutputPath)$(AssemblyName).dll" DestinationFolder="$(TargetDir)" OverwriteReadOnlyFiles="true" />
+    <Copy SourceFiles="kndzyi49pe691.png" DestinationFolder="$(TargetDir)" Condition="Exists('kndzyi49pe691.png')" />
     
     <Message Importance="high" Text="Copied $(AssemblyName).dll to $(TargetDir)" />
+    <Message Importance="high" Text="Copied kndzyi49pe691.png to $(TargetDir)" Condition="Exists('kndzyi49pe691.png')" />
   </Target>
 
 </Project>
